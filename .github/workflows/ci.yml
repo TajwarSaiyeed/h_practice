@@ -49,6 +49,12 @@ jobs:
         working-directory: ./services/user-service
         run: pnpm prisma generate
 
+      - name: Push Database Schema
+        working-directory: ./services/user-service
+        env:
+          DATABASE_URL: postgresql://postgres:postgres123@localhost:5432/user_db_test?schema=public
+        run: pnpm prisma db push
+
       - name: Run tests
         working-directory: ./services/user-service
         env:
@@ -98,6 +104,12 @@ jobs:
       - name: Generate Prisma Client
         working-directory: ./services/post-service
         run: pnpm prisma generate
+
+      - name: Push Database Schema
+        working-directory: ./services/post-service
+        env:
+          DATABASE_URL: postgresql://postgres:postgres123@localhost:5433/post_db_test?schema=public
+        run: pnpm prisma db push
 
       - name: Run tests
         working-directory: ./services/post-service
