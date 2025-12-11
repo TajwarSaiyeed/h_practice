@@ -1,0 +1,10 @@
+--- User Service Test Logs ---
+Request: POST /api/users/register
+Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+------------------------------------------------
+Request: POST /api/users/auth
+Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+------------------------------------------------
+Request: GET /api/users/profile
+Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+------------------------------------------------
