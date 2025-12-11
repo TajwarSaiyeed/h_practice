@@ -1,7 +1,23 @@
-import request from "supertest";
-import app from "../src/app.js";
-import prisma from "../src/config/db.js";
-import jwt from "jsonwebtoken";
+import { jest } from "@jest/globals";
+
+// Mock RabbitMQ
+jest.unstable_mockModule("../src/utils/rabbitmq.js", () => ({
+  connectRabbitMQ: jest.fn(),
+  publishEvent: jest.fn(),
+  getChannel: jest.fn(),
+}));
+
+// Mock gRPC Client
+jest.unstable_mockModule("../src/grpcClient.js", () => ({
+  getUser: jest
+    .fn()
+    .mockResolvedValue({ id: "test-user-id", name: "Test User" }),
+}));
+
+const request = (await import("supertest")).default;
+const app = (await import("../src/app.js")).default;
+const prisma = (await import("../src/config/db.js")).default;
+const jwt = (await import("jsonwebtoken")).default;
 
 describe("Post Endpoints", () => {
   let token;
