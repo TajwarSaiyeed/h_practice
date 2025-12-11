@@ -1,22 +1,7 @@
 --- Post Service Test Logs ---
 Request: POST /api/posts
-Response: {"id":"19e9d7d7-e639-45cf-b2c2-c21719ea7ff3","title":"My First Post 27127","content":"This is the content of the post.","userId":"28738a74-fd13-47f6-bf98-a89dcabc7c83","createdAt":"2025-12-11T10:39:57.637Z","updatedAt":"2025-12-11T10:39:57.637Z"}
+Response: {"message":"Not authorized, no token"}
 ------------------------------------------------
 Request: GET /api/posts
-Response: [{"id":"19e9d7d7-e639-45cf-b2c2-c21719ea7ff3","title":"My First Post 27127","content":"This is the content of the post.","userId":"28738a74-fd13-47f6-bf98-a89dcabc7c83","createdAt":"2025-12-11T10:39:57.637Z","updatedAt":"2025-12-11T10:39:57.637Z"}]
-------------------------------------------------
-Request: GET /api/posts/19e9d7d7-e639-45cf-b2c2-c21719ea7ff3
-Response: {"id":"19e9d7d7-e639-45cf-b2c2-c21719ea7ff3","title":"My First Post 27127","content":"This is the content of the post.","userId":"28738a74-fd13-47f6-bf98-a89dcabc7c83","createdAt":"2025-12-11T10:39:57.637Z","updatedAt":"2025-12-11T10:39:57.637Z"}
-------------------------------------------------
-Request: PUT /api/posts/19e9d7d7-e639-45cf-b2c2-c21719ea7ff3
-Response: {"id":"19e9d7d7-e639-45cf-b2c2-c21719ea7ff3","title":"Updated Title","content":"Updated Content","userId":"28738a74-fd13-47f6-bf98-a89dcabc7c83","createdAt":"2025-12-11T10:39:57.637Z","updatedAt":"2025-12-11T10:39:57.737Z"}
-------------------------------------------------
-Request: POST /api/interactions/19e9d7d7-e639-45cf-b2c2-c21719ea7ff3
-Response: {"id":"9a5721e5-b383-4016-9161-5c240c30ba35","userId":"28738a74-fd13-47f6-bf98-a89dcabc7c83","postId":"19e9d7d7-e639-45cf-b2c2-c21719ea7ff3","type":"LIKE","createdAt":"2025-12-11T10:39:57.864Z"}
-------------------------------------------------
-Request: GET /api/interactions/19e9d7d7-e639-45cf-b2c2-c21719ea7ff3
-Response: {"likes":1,"dislikes":0}
-------------------------------------------------
-Request: DELETE /api/posts/19e9d7d7-e639-45cf-b2c2-c21719ea7ff3
-Response: {"message":"Post removed"}
+Response: []
 ------------------------------------------------

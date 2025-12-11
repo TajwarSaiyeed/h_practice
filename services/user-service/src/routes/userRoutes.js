@@ -13,6 +13,10 @@ import {
 
 const router = express.Router();
 
+router.get("/health", (req, res) => {
+  res.status(200).json({ status: "UP" });
+});
+
 router.post("/register", validateRegister, registerUser);
 router.post("/auth", validateLogin, authUser);
 router.post("/logout", logoutUser);

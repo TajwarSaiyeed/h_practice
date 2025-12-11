@@ -115,6 +115,8 @@ services:
     restart: always
     environment:
       PORT: ${NOTIFICATION_SERVICE_PORT}
+    ports:
+      - "${NOTIFICATION_SERVICE_PORT}:${NOTIFICATION_SERVICE_PORT}"
     depends_on:
       - rabbitmq
     command: sh -c "pnpm start"

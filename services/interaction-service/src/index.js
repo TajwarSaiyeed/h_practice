@@ -3,7 +3,7 @@ import { connectRabbitMQ, consumeEvent } from "./utils/rabbitmq.js";
 
 const PORT = process.env.PORT || 3003;
 
-app.listen(PORT, async () => {
+app.listen(PORT, "0.0.0.0", async () => {
   console.log(`Interaction Service running on port ${PORT}`);
   await connectRabbitMQ();
 

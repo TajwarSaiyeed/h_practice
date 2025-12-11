@@ -1,10 +1,28 @@
 --- User Service Test Logs ---
 Request: POST /api/users/register
-Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+Response: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.4</center>
+</body>
+</html>
 ------------------------------------------------
 Request: POST /api/users/auth
-Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+Response: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.4</center>
+</body>
+</html>
 ------------------------------------------------
 Request: GET /api/users/profile
-Response: {"id":"28738a74-fd13-47f6-bf98-a89dcabc7c83","name":"User 27127","email":"user27127@example.com"}
+Response: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.4</center>
+</body>
+</html>
 ------------------------------------------------
