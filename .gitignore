@@ -1,0 +1,11 @@
+plans/
+node_modules/
+.env
+.DS_Store
+coverage/
+dist/
+build/
+.vscode
+
+logs/
+*.txt
