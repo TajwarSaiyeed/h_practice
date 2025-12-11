@@ -3,7 +3,7 @@ name: CD - Deploy to Production
 # Only run when you're ready to deploy
 # Uncomment the trigger when you have EC2 setup
 on:
-  workflow_dispatch:  # Manual trigger from GitHub UI
+  workflow_dispatch: # Manual trigger from GitHub UI
   # push:
   #   branches: [ main ]
   #   paths-ignore:
@@ -27,38 +27,38 @@ jobs:
           cat << EOF > .env
           NODE_ENV=production
           JWT_SECRET=${{ secrets.JWT_SECRET }}
-          
+
           # User Service
           USER_SERVICE_PORT=3001
           USER_DB_USER=${{ secrets.USER_DB_USER }}
           USER_DB_PASSWORD=${{ secrets.USER_DB_PASSWORD }}
           USER_DB_NAME=user_db
           USER_DATABASE_URL=postgresql://${{ secrets.USER_DB_USER }}:${{ secrets.USER_DB_PASSWORD }}@user-db:5432/user_db?schema=public
-          
+
           # Post Service
           POST_SERVICE_PORT=3002
           POST_DB_USER=${{ secrets.POST_DB_USER }}
           POST_DB_PASSWORD=${{ secrets.POST_DB_PASSWORD }}
           POST_DB_NAME=post_db
           POST_DATABASE_URL=postgresql://${{ secrets.POST_DB_USER }}:${{ secrets.POST_DB_PASSWORD }}@post-db:5432/post_db?schema=public
-          
+
           # Interaction Service
           INTERACTION_SERVICE_PORT=3003
           INTERACTION_DB_USER=${{ secrets.INTERACTION_DB_USER }}
           INTERACTION_DB_PASSWORD=${{ secrets.INTERACTION_DB_PASSWORD }}
           INTERACTION_DB_NAME=interaction_db
           INTERACTION_DATABASE_URL=postgresql://${{ secrets.INTERACTION_DB_USER }}:${{ secrets.INTERACTION_DB_PASSWORD }}@interaction-db:5432/interaction_db?schema=public
-          
+
           # Notification Service
           NOTIFICATION_SERVICE_PORT=3004
-          
+
           # RabbitMQ
           RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
-          RABBITMQ_DEFAULT_USER=guest
-          RABBITMQ_DEFAULT_PASS=guest
-          
+          RABBITMQ_DEFAULT_USER=${{ secrets.RABBITMQ_DEFAULT_USER || 'guest' }}
+          RABBITMQ_DEFAULT_PASS=${{ secrets.RABBITMQ_DEFAULT_PASS || 'guest' }}
+
           # Grafana
-          GF_SECURITY_ADMIN_PASSWORD=${{ secrets.GRAFANA_PASSWORD }}
+          GRAFANA_ADMIN_PASSWORD=${{ secrets.GRAFANA_ADMIN_PASSWORD || 'admin' }}
           EOF
 
       - name: Copy files to EC2
@@ -79,27 +79,27 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/${{ secrets.EC2_USERNAME }}/h_practice
-            
+
             # Pull latest images
             docker compose pull
-            
+
             # Run database migrations
             docker compose run --rm user-service pnpm prisma migrate deploy
             docker compose run --rm post-service pnpm prisma migrate deploy
             docker compose run --rm interaction-service pnpm prisma migrate deploy
-            
+
             # Restart services with zero-downtime
             docker compose up -d --build --force-recreate
-            
+
             # Clean up old images
             docker image prune -af
-            
+
             # Health check
             sleep 10
             curl -f http://localhost/api/users/health || exit 1
             curl -f http://localhost/api/posts/health || exit 1
             curl -f http://localhost/api/interactions/health || exit 1
-            
+
             echo "Deployment successful!"
 
       - name: Notify deployment status

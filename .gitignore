@@ -5,3 +5,5 @@ coverage/
 dist/
 build/
 .vscode
+aws-deploy-key.pem
+config.md
